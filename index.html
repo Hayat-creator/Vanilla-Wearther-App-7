@@ -9,39 +9,39 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <link rel="stylesheet" href="src/style.css" />
-    <title>Wearther App</title>
+    <title>Weather App</title>
   </head>
   <body>
     <div class="container">
-      <div class="Wearther-app-wrapper">
-        <div class="Wearther-app">
+      <div class="Weather-app-wrapper">
+        <div class="Weather-app">
           <div class="overview">
-            <h1>Innsbruck</h1>
+            <h1 id="city"></h1>
             <ul>
               <li>Friday 21:00</li>
-              <li>Rain</li>
+              <li id="description"></li>
             </ul>
           </div>
           <div class="row">
             <div class="col-6">
-              <div class="d-flex Wearther-temperature">
+              <div class="d-flex Weather-temperature">
                 <img
                   src="https://ssl.gstatic.com/onebox/weather/64/rain.png"
                   alt="clear"
                 />
 
-                <strong id="temperature">11</strong
+                <strong id="temperature"></strong
                 ><span class="units">°C | <a href="#">°F</a></span>
               </div>
             </div>
 
             <div class="col-6">
               <ul>
-                <li>Precipitation: 100%</li>
-                <li>Humidity: 95%</li>
-                <li>Wind: 11km/h</li>
+                <li>Humidity: <span id="humidity"></span>%</li>
+                <li>Wind: <span id="Wind"></span>km/h</li>
               </ul>
             </div>
           </div>
