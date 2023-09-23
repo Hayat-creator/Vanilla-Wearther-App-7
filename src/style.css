@@ -2,13 +2,6 @@ body {
   font-family: arial, sans-serif;
 }
 
-.wearther-app {
-  max-width: 600px;
-  margin: 30px auto;
-  padding: 20px;
-  border: 1px solid #dadde1;
-}
-
 h1 {
   color: #878787;
   font-size: 24px;
@@ -27,7 +20,46 @@ li {
   margin: 0;
   padding: 0;
   color: rgb(135, 135, 135);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 100;
   line-height: 19px;
+}
+
+.Wearther-app-wrapper {
+  max-width: 600px;
+  margin: 30px auto;
+}
+
+.Wearther-app {
+  padding: 20px;
+  border: 1px solid #dadde1;
+  border-radius: 5px;
+}
+
+.overview {
+  margin-bottom: 20px;
+}
+
+.Wearther-temperature img {
+  height: 64px;
+  width: 64px;
+  margin-right: 5px;
+}
+
+.Wearther-temperature strong {
+  color: #202124;
+  font-size: 60px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.Wearther-temperature .units {
+  position: relative;
+  font-size: 16px;
+  top: -33;
+}
+
+.small {
+  font-size: 0.875em;
+  box-sizing: border-box;
 }
