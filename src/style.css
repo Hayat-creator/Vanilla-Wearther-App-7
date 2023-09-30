@@ -68,3 +68,12 @@ li:first-letter {
   font-size: 0.875em;
   box-sizing: border-box;
 }
+
+.Weather-temperature .active {
+  color: #202124;
+  cursor: default;
+}
+
+.Weather-temperature .active:hover {
+  text-decoration: none;
+}
