@@ -67,6 +67,7 @@ li:first-letter {
 .small {
   font-size: 0.875em;
   box-sizing: border-box;
+  text-align: center;
 }
 
 .Weather-temperature .active {
