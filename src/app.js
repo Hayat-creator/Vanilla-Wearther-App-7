@@ -44,19 +44,17 @@ function displayForecast(response) {
         `<div class="col-2">
         <div class="Weather-forecast-date">${formatDay(forecastDay.dt)}</div>
         <img
-          src="https://openweathermap.org/img/wn/${
-            forecastDay.weather[0].icon
-          }@2x.png"
+          src="${forecastDay.condition.icon_url}"
           alt=""
           width="42"
         />
         <div class="Weather-forecast-temperature">
-          <span class="Weather-forecast-temperature-max">${Math.round(
+          <span class="Weather-forecast-temperature-max"> ${Math.round(
             forecastDay.temp.max
-          )}°</span>
-          <span class="Weather-forecast-temperature-min">${Math.round(
+          )}° </span>
+          <span class="Weather-forecast-temperature-min"> ${Math.round(
             forecastDay.temp.min
-          )}°</span>
+          )}° </span>
         </div> 
     </div>
     </div>
@@ -69,12 +67,10 @@ function displayForecast(response) {
 }
 
 function getForecast(coordinates) {
-  console.log(coordinates);
-  let apiKey = "1266ad07b66517497b1acf79ea5a6a64";
+  let apiKey = "37b23b22531439596a3b6o0fd183t507";
   let apiUrl = `
-https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+https://api.shecodes.io/weather/v1/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&key=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayForecast);
-  console.log(apiUrl);
 }
 
 function displayTemperature(response) {
@@ -94,16 +90,15 @@ function displayTemperature(response) {
   humidityElemen.innerHTML = response.data.main.humidity;
   windElement.innerHTML = Math.round(response.data.wind.speed);
   dateElement.innerHTML = formatDate(response.data.dt * 1000);
-  iconElement.setAttribute(
-    "src",
-    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-  );
+  iconElement.setAttribute("src", response.data.condition.icon_url);
   iconElement.setAttribute("alt", response.data.weather[0].description);
+
+  getForecast(response.data.coord);
 }
 
 function search(city) {
-  let apiKey = "1266ad07b66517497b1acf79ea5a6a64";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  let apiKey = "37b23b22531439596a3b6o0fd183t507";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayTemperature);
 }
 
@@ -113,33 +108,7 @@ function handleSubmit(event) {
   search(cityInputElement.value);
 }
 
-function displayfahrenheitTemperature(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#temperature");
-
-  celsiusLink.classList.remove("active");
-  fahrenheitLink.classList.add("active");
-  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
-  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
-}
-
-function displaycelsiusTemperature(event) {
-  event.preventDefault();
-  celsiusLink.classList.add("active");
-  fahrenheitLink.classList.remove("active");
-  let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = Math.round(celsiusTemperature);
-}
-
-let celsiusTemperature = null;
-
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
-
-let fahrenheitLink = document.querySelector("#fahrenheit-link");
-fahrenheitLink.addEventListener("click", displayfahrenheitTemperature);
-
-let celsiusLink = document.querySelector("#celsius-link");
-celsiusLink.addEventListener("click", displaycelsiusTemperature);
 
 search("Innsbruck");
