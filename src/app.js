@@ -42,7 +42,7 @@ function displayForecast(response) {
       forecastHTML =
         forecastHTML +
         `<div class="col-2">
-        <div class="Weather-forecast-date">${formatDay(forecastDay.dt)}</div>
+        <div class="Weather-forecast-date">${formatDay(forecastDay.time)}</div>
         <img
           src="${forecastDay.condition.icon_url}"
           alt=""
@@ -50,14 +50,14 @@ function displayForecast(response) {
         />
         <div class="Weather-forecast-temperature">
           <span class="Weather-forecast-temperature-max"> ${Math.round(
-            forecastDay.temp.max
+            forecastDay.temperature.maximum
           )}° </span>
-          <span class="Weather-forecast-temperature-min"> ${Math.round(
-            forecastDay.temp.min
+          <span class="Weather-forecast-temperature-minimum"> ${Math.round(
+            forecastDay.temperature.minimum
           )}° </span>
         </div> 
     </div>
-    </div>
+    
     `;
     }
   });
@@ -69,7 +69,7 @@ function displayForecast(response) {
 function getForecast(coordinates) {
   let apiKey = "37b23b22531439596a3b6o0fd183t507";
   let apiUrl = `
-https://api.shecodes.io/weather/v1/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&key=${apiKey}&units=metric`;
+https://api.shecodes.io/weather/v1/forecast?lat=${coordinates.latitude}&lon=${coordinates.longitude}&key=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayForecast);
 }
 
@@ -82,18 +82,18 @@ function displayTemperature(response) {
   let dateElement = document.querySelector("#date");
   let iconElement = document.querySelector("#icon");
 
-  celsiusTemperature = response.data.main.temp;
+  celsiusTemperature = response.data.temperature.current;
 
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
-  cityElement.innerHTML = response.data.name;
-  descriptionElement.innerHTML = response.data.weather[0].description;
-  humidityElemen.innerHTML = response.data.main.humidity;
+  cityElement.innerHTML = response.data.city;
+  descriptionElement.innerHTML = response.data.condition.description;
+  humidityElemen.innerHTML = response.data.temperature.humidity;
   windElement.innerHTML = Math.round(response.data.wind.speed);
   dateElement.innerHTML = formatDate(response.data.dt * 1000);
   iconElement.setAttribute("src", response.data.condition.icon_url);
-  iconElement.setAttribute("alt", response.data.weather[0].description);
+  iconElement.setAttribute("alt", response.data.condition.description);
 
-  getForecast(response.data.coord);
+  getForecast(response.data.coordinates);
 }
 
 function search(city) {
